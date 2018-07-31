@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.chord-popup{
+  display: none;
+}
+.chord:hover .chord-popup{
+  display: block;
+  position: relative;
+  background-color: tomato;
+  width: 100px;
+  height: 100px;
+}

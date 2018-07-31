@@ -1,0 +1,22 @@
+<form>
+  <input type="text" name="search" [(ngModel)]="query" (ngModelChange)="getSearchSuggestions(query)">
+  <button (click)="search(query)">Search</button>
+</form>
+
+<div class='suggestions'>
+  <h4>Suggestions</h4>
+  <ul>
+    <li *ngFor="let suggest of suggestions">
+      {{suggest}}
+    </li>
+  </ul>
+</div>
+
+<div class="chord" *ngFor="let chord of searchResult">
+  <div>
+    <p>{{chord.name}}</p>
+    <p>{{chord.artist}}</p>
+    <p>{{chord.rating}}/5 of {{chord.numberRates}} votes</p>
+    <button (click)="getSingleChord(chord.url)">More details</button>
+  </div>
+</div>

@@ -9,12 +9,22 @@ import { routes } from './routes';
 import { FormsModule } from '@angular/forms';
 import { SessionService } from '../services/session';
 import { HttpModule } from '@angular/http';
+import { HomeComponent } from './home/home.component';
+import { ChordsService } from '../services/chords';
+import { SingleTabComponent } from './single-tab/single-tab.component';
+import { ChordPipe } from './pipes/chord.pipe';
+import { ChordsImageService } from '../services/chordImage';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    HomeComponent,
+    SingleTabComponent,
+    ChordPipe,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +32,7 @@ import { HttpModule } from '@angular/http';
     FormsModule,
     HttpModule
   ],
-  providers: [SessionService],
+  providers: [SessionService, ChordsService, ChordsImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

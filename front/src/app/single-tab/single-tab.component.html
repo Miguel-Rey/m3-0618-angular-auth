@@ -1,0 +1,6 @@
+<div>
+  <p class="B">{{chord.name}}</p>
+  <p>{{chord.artist}}</p>
+  <img src="../../assets/img/B_4.gif" alt="">
+ <pre *ngIf="chord.content" [innerHTML]= 'chord.content.text | chordify'></pre>
+</div>
