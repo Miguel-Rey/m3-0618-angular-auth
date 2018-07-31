@@ -1,6 +1,7 @@
 <div>
   <p class="B">{{chord.name}}</p>
   <p>{{chord.artist}}</p>
+  <button (click)="addFavourite(chord.url)">Add to favourites</button>
   <img src="../../assets/img/B_4.gif" alt="">
  <pre *ngIf="chord.content" [innerHTML]= 'chord.content.text | chordify'></pre>
 </div>

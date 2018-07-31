@@ -48,5 +48,22 @@ export class ChordsService {
     )
   }
 
+  addFavourite(url){
+    return this.http.post(`${BASEURL}/api/chords/favourite`, {url}, this.options).pipe(
+      map ( (res:Response) => {
+        return res.json();
+      })
+    )
+  }
+
+  deleteFavourite(url){
+    return this.http.post(`${BASEURL}/api/chords/delete`, {url}, this.options).pipe(
+      map ( (res:Response) => {
+        console.log(res.json())
+        return res.json();
+      })
+    )
+  }
+
 
 }

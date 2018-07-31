@@ -30,5 +30,11 @@ export class SingleTabComponent implements OnInit {
     })
   }
 
+  addFavourite(url){
+    this.ChordsService.addFavourite(url).subscribe( data => {
+      console.log('succesfully added', data);
+    })
+  }
+
 
 }

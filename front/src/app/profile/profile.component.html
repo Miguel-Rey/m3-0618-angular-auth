@@ -1,2 +1,12 @@
-<p *ngIf="SessionService.user">  {{ SessionService.user.username }}</p>
-<p *ngIf="SessionService.user">  {{ SessionService.user.favourites }}</p>
+<p *ngIf="SessionService.user">{{ SessionService.user.username }} favourites</p>
+
+<div class="chord" *ngFor="let favourite of userFavourites">
+  <div>
+    <p>{{favourite.name}}</p>
+    <p>{{favourite.artist}}</p>
+    <p>{{favourite.rating}}/5 of {{favourite.numberRates}} votes</p>
+    <button (click)="getSingleChord(favourite.url)">More details</button>
+    <button (click)="deleteFavourite(favourite.url)">Delete from favourites</button>
+  </div>
+</div>
+
