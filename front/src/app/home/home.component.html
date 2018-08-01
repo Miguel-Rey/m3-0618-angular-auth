@@ -18,6 +18,9 @@
     <p>{{chord.artist}}</p>
     <p>{{chord.rating}}/5 of {{chord.numberRates}} votes</p>
     <button (click)="getSingleChord(chord.url)">More details</button>
-    <button (click)="addFavourite(chord.url)">Add to favourites</button>
+    <button *ngIf="!isFavourite(chord.url)" (click)="addFavourite(chord.url)">Add to favourites</button>
+    <button *ngIf="isFavourite(chord.url)" (click)="deleteFavourite(chord.url)">Delete from favourites</button>
   </div>
 </div>
+
+<button *ngIf='searchResult.length > 1' (click)="searchMore(prevQuery)">More results</button>

@@ -4,7 +4,7 @@
   <div>
     <p>{{favourite.name}}</p>
     <p>{{favourite.artist}}</p>
-    <p>{{favourite.rating}}/5 of {{favourite.numberRates}} votes</p>
+    <p>{{favourite.rating | number: '1.1-1'}}/5 of {{favourite.numberRates}} votes</p>
     <button (click)="getSingleChord(favourite.url)">More details</button>
     <button (click)="deleteFavourite(favourite.url)">Delete from favourites</button>
   </div>

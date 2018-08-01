@@ -53,10 +53,35 @@ router.post('/suggestions', (req, res, next) => {
 
 router.post('/favourite', (req, res, next) => {
   const url = req.body.url
+  const newFavourites = req.user.favourites;
+  if(newFavourites.indexOf(url) == -1){
+    newFavourites.push(url);
+  }
+  User.findByIdAndUpdate(req.user._id,{favourites: newFavourites})
+  .then( user => {
+    res.status(200).json(user);
+  })
+})
+
+router.post('/delete', (req, res, next) => {
+  console.log(req.user)
+  const url = req.body.url
+  const favourites = req.user.favourites;
+  if (favourites.indexOf(url) > -1){
+    favourites.splice(favourites.indexOf(url), 1);
+  }
+  User.findByIdAndUpdate(req.user._id,{favourites: favourites})
+  .then( user => {
+    console.log(user);
+    res.status(200).json(user);
+  })
+  .catch( err => {
+    console.log(err);
+  })
 })
 
 router.use((err, req, res, next) => {
-  res.status(500).json({ message: err.message });
+  res.status(500).json({ message: err.message })
 })
 
 

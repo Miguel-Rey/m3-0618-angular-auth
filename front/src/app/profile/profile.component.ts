@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, EventEmitter } from "@angular/core";
 import { SessionService } from "../../services/session";
 import { ChordsService } from "../../services/chords";
 import { forkJoin } from "../../../node_modules/rxjs";
+import { Router } from "../../../node_modules/@angular/router";
 
 @Component({
   selector: "app-profile",
@@ -9,10 +10,13 @@ import { forkJoin } from "../../../node_modules/rxjs";
   styleUrls: ["./profile.component.css"]
 })
 export class ProfileComponent implements OnInit {
+
   userFavourites;
+
   constructor(
     private SessionService: SessionService,
-    private ChordsService: ChordsService
+    private ChordsService: ChordsService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -27,7 +31,6 @@ export class ProfileComponent implements OnInit {
       });
       forkJoin(favourites).subscribe( 
         favouritesArray => {
-          console.log(favouritesArray)
           this.userFavourites = favouritesArray;
         },
         err => {
@@ -36,7 +39,15 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  getSingleChord(url){
+    const replaceLong = 'https://tabs.ultimate-guitar.com/'.length
+    const id = url.slice(replaceLong).split('/').join('__');
+    this.router.navigate(['/single',id])
+  }
+
   deleteFavourite(url){
-    this.ChordsService.deleteFavourite(url).subscribe();
+    this.userFavourites.splice(this.userFavourites.indexOf(url), 1);
+    this.ChordsService.deleteFavourite(url).subscribe( data => {
+    });
   }
 }

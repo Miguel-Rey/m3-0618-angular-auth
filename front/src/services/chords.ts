@@ -22,8 +22,8 @@ export class ChordsService {
   constructor(private http:Http) {
   }
 
-  searchChords(query){
-    return this.http.post(`${BASEURL}/api/chords`,{query}, this.options).pipe(
+  searchChords(query, page){
+    return this.http.post(`${BASEURL}/api/chords`,{query, page}, this.options).pipe(
       map ( (res:Response) => {
         return res.json();
       }),

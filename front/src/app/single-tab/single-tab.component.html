@@ -1,7 +1,16 @@
-<div>
+<div class="utils">
+  <h2>Utils</h2>
+  <button id="autoscroll">Autoscroll</button>
+  <button id="trasposeUp">Traspose +1</button>
+  <button id="trasposeDown">Trapose -1</button>
+</div>
+
+<div *ngIf="chord">
   <p class="B">{{chord.name}}</p>
   <p>{{chord.artist}}</p>
-  <button (click)="addFavourite(chord.url)">Add to favourites</button>
-  <img src="../../assets/img/B_4.gif" alt="">
- <pre *ngIf="chord.content" [innerHTML]= 'chord.content.text | chordify'></pre>
+  <button *ngIf="!isFavourite(chord.url)" (click)="addFavourite(chord.url)">Add to favourites</button>
+  <button *ngIf="isFavourite(chord.url)" (click)="deleteFavourite(chord.url)">Delete from favourites</button>
+  <pre class="chord-content" *ngIf="chord.content"  [innerHTML]= 'chord.content.text | chordify'></pre>
 </div>
+
+<div id="scroll-reference"></div>
