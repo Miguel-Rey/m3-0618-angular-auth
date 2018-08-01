@@ -16,7 +16,7 @@ export class ChordPipe implements PipeTransform {
       return e
         .replace(
           "[ch]",
-          `<span class="chord ${chord}" (onmouseover="test()")>`
+          `<span class="chord ${chord}">`
         )
         .replace("[/ch]", `${chordPopUp}</span>`);
     };

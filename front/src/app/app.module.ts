@@ -14,7 +14,8 @@ import { ChordsService } from '../services/chords';
 import { SingleTabComponent } from './single-tab/single-tab.component';
 import { ChordPipe } from './pipes/chord.pipe';
 import { ChordsImageService } from '../services/chordImage';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './profile/profile.component'
+import { ChordContentComponent } from './chord-content/chord-content.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProfileComponent } from './profile/profile.component';
     HomeComponent,
     SingleTabComponent,
     ChordPipe,
-    ProfileComponent
+    ProfileComponent,
+    ChordContentComponent
   ],
   imports: [
     BrowserModule,
