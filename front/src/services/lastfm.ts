@@ -13,22 +13,19 @@ const {BASEURL} = environment;
 @Injectable()
 export class LastFMService {
 
+  options:object = {withCredentials:true};
+
   constructor(private http:Http) {
   }
 
   getSimilarTracks(artist,song){
-    return this.http.get(`http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=${artist}&track=${song}&api_key=051c13424388df5b0f3b04b971ac6eee&format=json`).pipe(
+    let url = `http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=${artist}&track=${song}&api_key=051c13424388df5b0f3b04b971ac6eee&format=json`;
+    console.log(url);
+    return this.http.get(url, this.options).pipe(
       map ( (res:Response) => {
-        console.log(res.json());
-      })
-    )
-  }
-
-  getChordImages(note){
-    return this.http.get(`${BASEURL}/api/chords/chordimage/${note}`).pipe(
-      map ( (res:Response) => {
-        return res.json()
-      })
+        return res;
+      }),
+      catchError ( e => {console.log('Error'); return of(e)})
     )
   }
 

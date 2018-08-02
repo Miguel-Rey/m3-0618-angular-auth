@@ -16,6 +16,7 @@ import { ChordPipe } from './pipes/chord.pipe';
 import { ChordsImageService } from '../services/chordImage';
 import { ProfileComponent } from './profile/profile.component'
 import { ChordContentComponent } from './chord-content/chord-content.component';
+import { LastFMService } from '../services/lastfm';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { ChordContentComponent } from './chord-content/chord-content.component';
     FormsModule,
     HttpModule
   ],
-  providers: [SessionService, ChordsService, ChordsImageService],
+  providers: [SessionService, ChordsService, ChordsImageService, LastFMService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

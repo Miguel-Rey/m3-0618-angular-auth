@@ -9,6 +9,10 @@ import { ChordsImageService } from '../../services/chordImage';
 export class ChordContentComponent implements OnChanges {
   @Input() chord: any;
   isScrollActivated = true;
+  intervalID;
+  scrollConfig = {
+    interval: 10
+  }
 
   constructor(private elRef:ElementRef, private ChordsImageService: ChordsImageService) { }
 
@@ -39,6 +43,21 @@ export class ChordContentComponent implements OnChanges {
     })
     document.getElementById('autoscroll').addEventListener('click', ()=>{
       this.scrollTo();   
+    })
+    document.addEventListener('keydown', function(e){
+      console.log(e.keyCode);
+      if(e.keyCode == 40){
+        e.preventDefault();
+        ChordComponent.speedDownScroll()
+      }
+      if(e.keyCode == 38){
+        e.preventDefault();
+        ChordComponent.speedUpScroll()
+      }
+      if(e.keyCode == 32){
+        e.preventDefault();
+        ChordComponent.moveWindowUp();
+      }
     })
   }
 
@@ -109,11 +128,30 @@ export class ChordContentComponent implements OnChanges {
   }
 
   scrollTo() {
-    document.documentElement.scrollTop += 100;
-    if(window.innerHeight + window.scrollY < document.body.offsetHeight){
-      console.log(this);
-      setTimeout(this.scrollTo(), 1000);
+    this.intervalID = setInterval(() => this.scrollInterval(), this.scrollConfig.interval);
+  }
+
+  scrollInterval(){
+    document.documentElement.scrollTop += 1;
+    if(window.innerHeight + window.scrollY > document.body.offsetHeight){
+      clearInterval(this.intervalID);
     }
+  }
+
+  speedUpScroll(){
+    clearInterval(this.intervalID);
+    this.scrollConfig.interval--
+    this.scrollTo();
+  }
+
+  speedDownScroll(){
+    clearInterval(this.intervalID);
+    this.scrollConfig.interval++
+    this.scrollTo();
+  }
+
+  moveWindowUp(){
+    document.documentElement.scrollTop -= 300;
   }
 
   isScrollAtBottom(){

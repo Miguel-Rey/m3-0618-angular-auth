@@ -23,7 +23,7 @@ export class SingleTabComponent implements OnInit {
     private paramsRouter: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private SessionService: SessionService,
-    private LastfmService: LastFMService
+    private LastFMService: LastFMService
   ) {}
   
   ngOnInit() {
@@ -37,6 +37,7 @@ export class SingleTabComponent implements OnInit {
         console.log(data);
         this.chord = data;
         this.getVersions(data.name, data.artist);
+        this.LastFMService.getSimilarTracks(data.artist, data.name);
       });
     });
   }
@@ -64,7 +65,9 @@ export class SingleTabComponent implements OnInit {
     })
   }
   getSimilarTracks(artist, song){
-    this.LastfmService.getSimilarTracks(artist, song).subscribe();
+    this.LastFMService.getSimilarTracks(artist, song).subscribe(data => {
+      console.log(data);
+    });
   }
 
 }
