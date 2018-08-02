@@ -12,4 +12,11 @@
   <app-chord-content *ngIf="chord.content" [chord]="chord.content.text"></app-chord-content>
 </div>
 
-<div id="scroll-reference"></div>
+<div class="versions">
+  <ul *ngIf="versions.length > 0">
+    <li *ngFor="let version of versions, let i = index">
+      <p>Version {{i+1}} - {{version.name}}</p>
+      <p>{{version.rating | number: '1.1-1' }}/5 of {{version.numberRates}} votes</p>
+    </li>
+  </ul>
+</div>

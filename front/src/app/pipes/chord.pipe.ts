@@ -10,15 +10,14 @@ export class ChordPipe implements PipeTransform {
     if (!input) {
       return "";
     }
-    let chordPopUp = '<div class="chord-popup"><img width=50></div>';
     const chordTransformer = e => {
       let chord = e.replace("[ch]", "").replace("[/ch]", "");
-      return e
-        .replace(
-          "[ch]",
-          `<span class="chord ${chord}">`
-        )
-        .replace("[/ch]", `${chordPopUp}</span>`);
+      let rootNote = chord.slice(0,1);
+      if(chord.slice(1,2) == '#'){
+        rootNote = chord.slice(0,2);
+      }
+      let sufix = chord.slice(rootNote.length);
+      return `<span class="chord ${chord}"><span class="rootNote">${rootNote}</span><span class="sufix">${sufix}</span></span>`
     };
     let newChord = input;
     let chordArr = input.match(/\[ch\](.*?)\[\/ch\]/g);

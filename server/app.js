@@ -86,8 +86,10 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 const authRouter = require('./routes/auth');
 const chordRouter = require('./routes/chords');
+const lastfmRouter = require('./routes/lastfm');
 app.use('/api/auth', authRouter);
 app.use('/api/chords', chordRouter);
+app.use('/api/lastfm', lastfmRouter);
 
 
 
