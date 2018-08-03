@@ -15,9 +15,10 @@ router.get('/chordimage/:id', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const query = req.body.query ;
+  const page = parseInt(req.body.page);
   ugs.search({
     query: query,
-    page: 1,
+    page: page,
     type: ['Chords']
   }, (error, tabs) => {
     if (error) {
@@ -45,7 +46,6 @@ router.post('/suggestions', (req, res, next) => {
     if (error) {
       console.log(error)
     } else {
-      console.log(suggestions);
       res.status(200).json(suggestions);
     }
   })
@@ -64,7 +64,6 @@ router.post('/favourite', (req, res, next) => {
 })
 
 router.post('/delete', (req, res, next) => {
-  console.log(req.user)
   const url = req.body.url
   const favourites = req.user.favourites;
   if (favourites.indexOf(url) > -1){
