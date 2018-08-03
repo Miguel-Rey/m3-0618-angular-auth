@@ -1,3 +1,8 @@
+<app-tuner *ngIf="showTuner"></app-tuner>
+<button (click)="toggleTunner()">
+  <span *ngIf="!showTuner">Show tuner</span>
+  <span *ngIf="showTuner">Hide tuner</span>
+</button>
 <h2>The chord</h2>
 <pre class="chord-content" *ngIf="chord"  [innerHTML]= 'chord | chordify'></pre>
 <div class="chord-popup">

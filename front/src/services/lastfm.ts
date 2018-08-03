@@ -19,15 +19,40 @@ export class LastFMService {
   }
 
   getSimilarTracks(artist,song){
-    let url = `http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=${artist}&track=${song}&api_key=051c13424388df5b0f3b04b971ac6eee&format=json`;
-    console.log(url);
-    return this.http.get(url, this.options).pipe(
+    let sanitizeArtist = artist.split(' ').join('_')
+    let sanitizeSong = song.split(' ').join('_')
+    return this.http.get(`${BASEURL}/api/lastfm/similar/${sanitizeArtist}/${sanitizeSong}`).pipe(
       map ( (res:Response) => {
-        return res;
+        return res.json();
       }),
       catchError ( e => {console.log('Error'); return of(e)})
     )
   }
 
+  getTopTracks(){
+    return this.http.get(`${BASEURL}/api/lastfm/top`).pipe(
+      map ( (res: Response) => {
+        return res.json();
+      }),
+      catchError ( e => {console.log('Error'); return of (e)})
+    )
+  }
+
+  getTopArtist(){
+    return this.http.get(`${BASEURL}/api/lastfm/artist`).pipe(
+      map ( (res: Response) => {
+        return res.json();
+      }),
+      catchError ( e => {console.log('Error'); return of (e)})
+    )
+  }
+
+  getArtistInfo(artist){
+    return this.http.get(`${BASEURL}/api/lastfm/info/${artist}`).pipe(
+      map ( (res:Response) => {
+        return res.json();
+      })
+    )
+  }
 
 }

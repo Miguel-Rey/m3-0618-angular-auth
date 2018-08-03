@@ -7,6 +7,14 @@
 <div *ngIf="chord">
   <p class="B">{{chord.name}}</p>
   <p>{{chord.artist}}</p>
+  <div *ngIf="artistInfo">
+    <img [src]="artistInfo.artist.image[2]['#text']" alt="">
+    <div>
+      <span *ngFor="let tag of artistInfo.artist.tags.tag">{{tag.name}} </span>
+    </div>
+    <p [innerHTML] = 'artistInfo.artist.bio.summary'></p>
+  </div>
+  <button (click)="getArtistInfo(chord.artist)">See more</button>
   <button *ngIf="!isFavourite(chord.url)" (click)="addFavourite(chord.url)">Add to favourites</button>
   <button *ngIf="isFavourite(chord.url)" (click)="deleteFavourite(chord.url)">Delete from favourites</button>
   <app-chord-content *ngIf="chord.content" [chord]="chord.content.text"></app-chord-content>
@@ -17,6 +25,16 @@
     <li *ngFor="let version of versions, let i = index">
       <p>Version {{i+1}} - {{version.name}}</p>
       <p>{{version.rating | number: '1.1-1' }}/5 of {{version.numberRates}} votes</p>
+    </li>
+  </ul>
+</div>
+
+<div class="recomended">
+  <ul *ngIf="recomended.length > 0">
+    <li *ngFor="let recomendedItem of recomended">
+      <p>{{recomendedItem.name}}</p>
+      <p>{{recomendedItem.artist}}</p>
+      <button (click)="getSingleChord(recomendedItem.url)">More details</button>
     </li>
   </ul>
 </div>

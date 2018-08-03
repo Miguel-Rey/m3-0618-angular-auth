@@ -13,6 +13,7 @@ export class ChordContentComponent implements OnChanges {
   scrollConfig = {
     interval: 10
   }
+  showTuner = false;
 
   constructor(private elRef:ElementRef, private ChordsImageService: ChordsImageService) { }
 
@@ -45,7 +46,6 @@ export class ChordContentComponent implements OnChanges {
       this.scrollTo();   
     })
     document.addEventListener('keydown', function(e){
-      console.log(e.keyCode);
       if(e.keyCode == 40){
         e.preventDefault();
         ChordComponent.speedDownScroll()
@@ -59,6 +59,10 @@ export class ChordContentComponent implements OnChanges {
         ChordComponent.moveWindowUp();
       }
     })
+  }
+
+  toggleTunner(){
+    this.showTuner = !this.showTuner;
   }
 
   showChord(chord){

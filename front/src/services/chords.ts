@@ -59,7 +59,6 @@ export class ChordsService {
   deleteFavourite(url){
     return this.http.post(`${BASEURL}/api/chords/delete`, {url}, this.options).pipe(
       map ( (res:Response) => {
-        console.log(res.json())
         return res.json();
       })
     )

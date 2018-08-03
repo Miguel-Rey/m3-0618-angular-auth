@@ -17,6 +17,8 @@ import { ChordsImageService } from '../services/chordImage';
 import { ProfileComponent } from './profile/profile.component'
 import { ChordContentComponent } from './chord-content/chord-content.component';
 import { LastFMService } from '../services/lastfm';
+import { SearchHolderComponent } from './search-holder/search-holder.component';
+import { TunerComponent } from './tuner/tuner.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { LastFMService } from '../services/lastfm';
     SingleTabComponent,
     ChordPipe,
     ProfileComponent,
-    ChordContentComponent
+    ChordContentComponent,
+    SearchHolderComponent,
+    TunerComponent
   ],
   imports: [
     BrowserModule,

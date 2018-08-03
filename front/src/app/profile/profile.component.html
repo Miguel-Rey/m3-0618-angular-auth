@@ -1,4 +1,6 @@
-<p *ngIf="SessionService.user">{{ SessionService.user.username }} favourites</p>
+<h2 *ngIf="SessionService.user">{{ SessionService.user.username }} profile favourites</h2>
+
+
 
 <div class="chord" *ngFor="let favourite of userFavourites">
   <div>

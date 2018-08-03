@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ChordsService } from "../../services/chords";
-import { ActivatedRoute } from "../../../node_modules/@angular/router";
+import { ActivatedRoute, Router } from "../../../node_modules/@angular/router";
 import { ChordsImageService } from "../../services/chordImage";
 import { DomSanitizer } from "../../../node_modules/@angular/platform-browser";
 import { SessionService } from "../../services/session";
@@ -16,14 +16,15 @@ export class SingleTabComponent implements OnInit {
   SecureChord: object;
   userFavourites: Array<string> = [];
   versions: Array<any> = [];
+  recomended: Array<any> = [];
+  artistInfo;
 
   constructor(
     private ChordsService: ChordsService,
-    private ChordsImageService: ChordsImageService,
     private paramsRouter: ActivatedRoute,
-    private sanitizer: DomSanitizer,
     private SessionService: SessionService,
-    private LastFMService: LastFMService
+    private LastFMService: LastFMService,
+    private router: Router
   ) {}
   
   ngOnInit() {
@@ -34,10 +35,9 @@ export class SingleTabComponent implements OnInit {
       const parsedId =
         "https://tabs.ultimate-guitar.com/" + params.id.split("__").join("/");
       this.ChordsService.getChordByUrl(parsedId).subscribe(data => {
-        console.log(data);
         this.chord = data;
         this.getVersions(data.name, data.artist);
-        this.LastFMService.getSimilarTracks(data.artist, data.name);
+        this.getSimilarTracks(data.artist, data.name);
       });
     });
   }
@@ -66,8 +66,27 @@ export class SingleTabComponent implements OnInit {
   }
   getSimilarTracks(artist, song){
     this.LastFMService.getSimilarTracks(artist, song).subscribe(data => {
-      console.log(data);
+      let long = data.similartracks.track.length < 10 ? data.similartracks.track.length : 10;
+      for( let i = 0; i < long; i++){
+        this.ChordsService.searchChords(data.similartracks.track[i].name, 1).subscribe(data => {
+          if(data.length > 0){
+            this.recomended.push(data[0]);
+          }
+        })
+      }
     });
   }
 
+  getSingleChord(url){
+    const replaceLong = 'https://tabs.ultimate-guitar.com/'.length
+    const id = url.slice(replaceLong).split('/').join('__');
+    this.router.navigate(['/single',id])
+  }
+
+  getArtistInfo(artist){
+    this.LastFMService.getArtistInfo(artist).subscribe( data => {
+      this.artistInfo = data
+    })
+  }
 }
+

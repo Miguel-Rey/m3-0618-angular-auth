@@ -1,6 +1,6 @@
 <form>
   <input type="text" name="search" [(ngModel)]="query" (ngModelChange)="getSearchSuggestions(query)">
-  <button (click)="search(query)">Search</button>
+  <button (click)="searchTop(query)">Search</button>
 </form>
 
 <div class='suggestions'>
@@ -11,6 +11,22 @@
     </li>
   </ul>
 </div>
+
+<div *ngIf="topTracks.length > 0" class="top-tracks">
+  <h2>TOP TRACKS</h2>
+  <div *ngFor="let track of topTracks">
+    <p>{{track.name}}</p>
+    <button (click)="searchTop(track.name)">Search tabs</button>
+  </div>
+</div>
+
+<div *ngIf="topArtist.length > 0" class="top-tracks">
+    <h2>TOP ARTIST</h2>
+    <div *ngFor="let artist of topArtist">
+      <p>{{artist.name}}</p>
+      <button (click)="searchTop(artist.name)">Search tabs</button>
+    </div>
+  </div>
 
 <div class="chord" *ngFor="let chord of searchResult">
   <div>
