@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from "../../../node_modules/@angular/router";
 @Component({
   selector: "app-search-holder",
   templateUrl: "./search-holder.component.html",
-  styleUrls: ["./search-holder.component.css"]
+  styleUrls: ["./search-holder.component.scss"]
 })
 export class SearchHolderComponent implements OnInit {
 

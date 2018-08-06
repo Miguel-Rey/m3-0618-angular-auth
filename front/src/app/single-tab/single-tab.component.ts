@@ -9,7 +9,7 @@ import { LastFMService } from "../../services/lastfm";
 @Component({
   selector: "app-single-tab",
   templateUrl: "./single-tab.component.html",
-  styleUrls: ["./single-tab.component.css"]
+  styleUrls: ["./single-tab.component.scss"]
 })
 export class SingleTabComponent implements OnInit {
   chord: object = {};

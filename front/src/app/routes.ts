@@ -6,6 +6,7 @@ import { SingleTabComponent } from './single-tab/single-tab.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchHolderComponent } from './search-holder/search-holder.component';
 import { TunerComponent } from './tuner/tuner.component';
+import { TopChartsComponent } from './top-charts/top-charts.component';
 
 export const routes: Routes = [
   { path:'signup', component:SignupComponent},
@@ -13,5 +14,7 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'single/:id', component: SingleTabComponent},
   { path: 'favourites', component: ProfileComponent},
-  { path: 'search/:query', component: SearchHolderComponent}
+  { path: 'search/:query', component: SearchHolderComponent},
+  { path: 'tuner', component: TunerComponent},
+  { path: 'charts', component: TopChartsComponent}
 ];

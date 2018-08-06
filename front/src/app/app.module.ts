@@ -19,6 +19,7 @@ import { ChordContentComponent } from './chord-content/chord-content.component';
 import { LastFMService } from '../services/lastfm';
 import { SearchHolderComponent } from './search-holder/search-holder.component';
 import { TunerComponent } from './tuner/tuner.component';
+import { TopChartsComponent } from './top-charts/top-charts.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TunerComponent } from './tuner/tuner.component';
     ProfileComponent,
     ChordContentComponent,
     SearchHolderComponent,
-    TunerComponent
+    TunerComponent,
+    TopChartsComponent
   ],
   imports: [
     BrowserModule,

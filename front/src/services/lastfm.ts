@@ -55,4 +55,12 @@ export class LastFMService {
     )
   }
 
+  getTrackInfo(artist, song){
+    return this.http.get(`${BASEURL}/api/lastfm/info/song/${artist}/${song}`).pipe(
+      map ( (res: Response) => {
+        return res.json()
+      })
+    )
+  }
+
 }

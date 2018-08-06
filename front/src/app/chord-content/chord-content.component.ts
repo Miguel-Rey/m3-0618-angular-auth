@@ -4,7 +4,7 @@ import { ChordsImageService } from '../../services/chordImage';
 @Component({
   selector: 'app-chord-content',
   templateUrl: './chord-content.component.html',
-  styleUrls: ['./chord-content.component.css']
+  styleUrls: ['./chord-content.component.scss']
 })
 export class ChordContentComponent implements OnChanges {
   @Input() chord: any;
@@ -172,7 +172,7 @@ export class ChordContentComponent implements OnChanges {
       let image;
       imagesArr.forEach(e => {
         image = document.createElement('img')
-        image.setAttribute('src',e);
+        image.setAttribute('src',`${e}.gif`);
         image.classList.add('chord-image');
         element.appendChild(image);
       })

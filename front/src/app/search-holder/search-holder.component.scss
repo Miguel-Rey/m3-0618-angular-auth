@@ -1,0 +1,11 @@
+.search-wrapper{
+  display: flex;
+  flex-direction: column;
+  .chord{
+    display: flex;
+    > * {
+      width: 20%;
+      text-align: left;
+    }
+  }
+}
