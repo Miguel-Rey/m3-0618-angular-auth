@@ -1,8 +1,8 @@
 import { Component, OnInit, EventEmitter } from "@angular/core";
 import { SessionService } from "../../services/session";
 import { ChordsService } from "../../services/chords";
-import { forkJoin } from "../../../node_modules/rxjs";
-import { Router } from "../../../node_modules/@angular/router";
+import { forkJoin } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-profile",
@@ -49,5 +49,14 @@ export class ProfileComponent implements OnInit {
     this.userFavourites.splice(this.userFavourites.indexOf(url), 1);
     this.ChordsService.deleteFavourite(url).subscribe( data => {
     });
+  }
+
+  isFavourite(url) {
+    return this.userFavourites.includes(url);
+  }
+
+  searchTop(query) {
+    let sanitizedQuery = query.split(" ").join("_");
+    this.router.navigate(["/search", sanitizedQuery]);
   }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ChordsService } from "../../services/chords";
-import { ActivatedRoute, Router } from "../../../node_modules/@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ChordsImageService } from "../../services/chordImage";
-import { DomSanitizer } from "../../../node_modules/@angular/platform-browser";
+import { DomSanitizer } from "@angular/platform-browser";
 import { SessionService } from "../../services/session";
 import { LastFMService } from "../../services/lastfm";
 

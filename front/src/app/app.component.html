@@ -23,10 +23,10 @@
     </form>
     <div *ngIf="sessionService.user" class="profile">
       <i class="icon-user"></i>
-      <span *ngIf="sessionService.user"></span> {{ sessionService.user.username }}
-      <ul class="menu_profile">
+      <span *ngIf="sessionService.user"> {{ sessionService.user.username }}</span>
+      <ul class="menu_profile hidden">
         <li *ngIf="sessionService.user">
-          <a href="#" [routerLink]="['/favourites']">Profile</a>
+          <a href="#" [routerLink]="['/favourites']">My favourites</a>
         </li>
         <li *ngIf="sessionService.user">
           <a href="#" (click)="logout()">Logout</a>

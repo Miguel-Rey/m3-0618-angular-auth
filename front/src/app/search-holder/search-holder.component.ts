@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { SessionService } from "../../services/session";
 import { ChordsService } from "../../services/chords";
-import { ActivatedRoute, Router } from "../../../node_modules/@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+
+
 
 @Component({
   selector: "app-search-holder",
@@ -80,5 +82,10 @@ export class SearchHolderComponent implements OnInit {
     } else {
       this.suggestions = null;
     }
+  }
+
+  searchTop(query) {
+    let sanitizedQuery = query.split(" ").join("_");
+    this.router.navigate(["/search", sanitizedQuery]);
   }
 }

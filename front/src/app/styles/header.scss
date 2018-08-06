@@ -3,6 +3,7 @@ header{
   height: 4em;
   background-color: $mainColor;
   color: #fff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
   .inner{
     margin: 0 auto;
     max-width: 1100px;
@@ -17,7 +18,7 @@ header{
         display: flex;
       }
       li{
-        margin: 0 1em;
+        margin: 0 2em 0 0;
         a{
           text-decoration: none;
           color: #fff;
@@ -30,6 +31,12 @@ header{
     form{
       width: 58%;
       position: relative;
+      &:hover{
+        i:before{
+          transition: color 100ms ease-in-out;
+          color: #666;
+        }
+      }
       input{
         width: 100%;
         height: 2rem;
@@ -39,6 +46,7 @@ header{
         font-family: $mainFont;
         box-sizing: border-box;
         font-size: 16px;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
         &:focus{
           outline: none;
         }
@@ -68,9 +76,43 @@ header{
     }
     .profile{
       width: 15%;
-      text-align: right;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative;
+      i{
+        font-size: 1.5em;
+        margin-right: 5px;
+      }
+      &:hover{
+        span{
+          text-decoration: underline;
+        }
+      }
       .menu_profile{
-        display: none;
+         position: absolute;
+         right: 0;
+         top: 55px;
+         background-color: $mainColor;
+         border-radius: 5px;
+         overflow: hidden;
+         text-align: center;
+         transition: top 350ms ease-out;
+         li{
+           padding: 0.5em 1em;
+           &:hover{
+             transition: background-color 100ms ease-in-out;
+             background-color: #ff9800;
+           }
+           a{
+             text-decoration: none;
+             color: #fff;
+           }
+         }
+         &.hidden{
+           top: -200px;
+         }
       }
     }
   }

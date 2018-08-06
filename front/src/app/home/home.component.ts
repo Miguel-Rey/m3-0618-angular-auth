@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ChordsService } from "../../services/chords";
-import { Router } from "../../../node_modules/@angular/router";
+import { Router } from "@angular/router";
 import { SessionService } from "../../services/session";
-import { forkJoin } from "../../../node_modules/rxjs";
+import { forkJoin } from "rxjs";
 import { LastFMService } from "../../services/lastfm";
 
 @Component({

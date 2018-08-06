@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { SessionService } from "../services/session";
 import { ChordsService } from "../services/chords";
-import { Router } from "../../node_modules/@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-root",
@@ -12,6 +12,7 @@ export class AppComponent {
   title = "app";
   suggestions;
   appComponent = this;
+  isProfileOpen = false;
   query;
   constructor(
     private sessionService: SessionService,
@@ -22,6 +23,9 @@ export class AppComponent {
       if(e.keyCode === 13 && document.getElementById('nav_search') === document.activeElement){
         this.searchTop(document.getElementById('nav_search').getAttribute('ng-reflect-model'));
       }
+    })
+    this.sessionService.isLogged().subscribe( user => {
+      document.getElementsByClassName('profile')[0].addEventListener('click', this.toggleProfile);
     })
   }
 
@@ -47,7 +51,12 @@ export class AppComponent {
     this.suggestions = [];
   }
 
-  fireSearch(){
-
+  toggleProfile(){
+    let menu = document.getElementsByClassName('menu_profile')[0]
+    if(menu.classList.contains('hidden')){
+      menu.classList.remove('hidden');
+    } else {
+      menu.classList.add('hidden');
+    }
   }
 }

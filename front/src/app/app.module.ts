@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { RouterModule } from '../../node_modules/@angular/router';
+import { RouterModule } from '@angular/router';
 import { routes } from './routes';
 import { FormsModule } from '@angular/forms';
 import { SessionService } from '../services/session';
@@ -20,6 +20,8 @@ import { LastFMService } from '../services/lastfm';
 import { SearchHolderComponent } from './search-holder/search-holder.component';
 import { TunerComponent } from './tuner/tuner.component';
 import { TopChartsComponent } from './top-charts/top-charts.component';
+import { RattingPipe } from './pipes/ratting.pipe';
+import { StopPropagationDirective } from './directives/stop-propagation.directive';
 
 @NgModule({
   declarations: [
@@ -29,11 +31,13 @@ import { TopChartsComponent } from './top-charts/top-charts.component';
     HomeComponent,
     SingleTabComponent,
     ChordPipe,
+    RattingPipe,
     ProfileComponent,
     ChordContentComponent,
     SearchHolderComponent,
     TunerComponent,
-    TopChartsComponent
+    TopChartsComponent,
+    StopPropagationDirective
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { DomSanitizer } from "../../../node_modules/@angular/platform-browser";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Pipe({
   name: "chordify"
