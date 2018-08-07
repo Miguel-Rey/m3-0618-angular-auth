@@ -61,10 +61,6 @@ export class ChordContentComponent implements OnChanges {
     })
   }
 
-  toggleTunner(){
-    this.showTuner = !this.showTuner;
-  }
-
   showChord(chord){
     let popup = document.querySelector('.chord-popup')
     popup.innerHTML = chord.innerText;

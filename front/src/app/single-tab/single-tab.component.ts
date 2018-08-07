@@ -18,7 +18,7 @@ export class SingleTabComponent implements OnInit {
   versions: Array<any> = [];
   recomended: Array<any> = [];
   artistInfo;
-
+  showTuner = false;
   constructor(
     private ChordsService: ChordsService,
     private paramsRouter: ActivatedRoute,
@@ -92,6 +92,10 @@ export class SingleTabComponent implements OnInit {
     let sanitizedQuery = query.split(" ").join("_");
     this.router.navigate(["/search", sanitizedQuery]);
     document.getElementById('search-suggestions').classList.remove('show');
+  }
+
+  toggleTunner(){
+    this.showTuner = !this.showTuner;
   }
 }
 
