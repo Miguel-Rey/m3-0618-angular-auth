@@ -7,7 +7,8 @@ const passport = require('passport');
 const ugs = require('ultimate-guitar-scraper')
 
 router.get('/chordimage/:id', (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.id.replace('___','♯');
+  console.log(id)
   Chord.find({completeName: id})
     .then( chord => res.status(200).json(chord))
     .catch(e => next(e))

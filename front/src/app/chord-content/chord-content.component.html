@@ -1,3 +1,7 @@
 <pre class="chord-content" *ngIf="chord"  [innerHTML]= 'chord | chordify'></pre>
-  <div class="chord-popup">
+<div class="chord-popup">
+  <div class="chord-name">{{popupName}}</div>
+  <div class="images">
+    <img *ngFor="let image of popupImages" [src]=image>
+  </div> 
 </div>

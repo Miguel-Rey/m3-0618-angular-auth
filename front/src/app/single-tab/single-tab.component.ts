@@ -96,6 +96,12 @@ export class SingleTabComponent implements OnInit {
 
   toggleTunner(){
     this.showTuner = !this.showTuner;
+    let mask = document.getElementById('tuner-mask')
+    if(mask.classList.contains('show')){
+      mask.classList.remove('show')
+    } else {
+      mask.classList.add('show')
+    }
   }
 }
 

@@ -27,7 +27,7 @@ export class ChordsService {
       map ( (res:Response) => {
         return res.json();
       }),
-      catchError( e => {console.log('Error'); return of(e)})
+      catchError( e => {console.log('Error', query, page); return of(e)})
     )
   }
 

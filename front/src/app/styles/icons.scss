@@ -24,6 +24,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 .icon-headphones:before {
   content: "\e910";
 }
@@ -35,6 +36,12 @@
 }
 .icon-search:before {
   content: "\e986";
+}
+.icon-zoom-in:before {
+  content: "\e987";
+}
+.icon-zoom-out:before {
+  content: "\e988";
 }
 .icon-star-empty:before {
   content: "\e9d7";
@@ -50,5 +57,8 @@
 }
 .icon-heart-broken:before {
   content: "\e9db";
+}
+.icon-cross:before {
+  content: "\ea0f";
 }
 

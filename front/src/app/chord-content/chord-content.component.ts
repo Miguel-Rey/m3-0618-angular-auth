@@ -14,8 +14,16 @@ export class ChordContentComponent implements OnChanges {
     interval: 10
   }
   showTuner = false;
+  popupImages = [];
+  popupName;
+  popupSettings = {
+    x: 0,
+    y: 0,
+  }
 
-  constructor(private elRef:ElementRef, private ChordsImageService: ChordsImageService) { }
+  constructor(private elRef:ElementRef, private ChordsImageService: ChordsImageService) { 
+    
+  }
 
   ngOnInit() {
   }
@@ -62,11 +70,9 @@ export class ChordContentComponent implements OnChanges {
   }
 
   showChord(chord){
-    let popup = document.querySelector('.chord-popup')
-    popup.innerHTML = chord.innerText;
+    let popup = document.querySelector('.chord-popup');
     popup.classList.add('show')
-    this.getChordImages(chord.innerText, popup);
-      
+    this.getChordImages(chord.innerText); 
   }
   hideChord(){
     let popup = document.querySelector('.chord-popup')
@@ -162,15 +168,14 @@ export class ChordContentComponent implements OnChanges {
     this.isScrollActivated = false;
   }
 
-  getChordImages(note, element) {
+  getChordImages(note) {
+    this.popupName = note;
+    this.popupImages = [];
+    console.log(note)
     return this.ChordsImageService.getChordImages(note).subscribe(data => {
       let imagesArr = data[0].images
-      let image;
       imagesArr.forEach(e => {
-        image = document.createElement('img')
-        image.setAttribute('src',`${e}.gif`);
-        image.classList.add('chord-image');
-        element.appendChild(image);
+        this.popupImages.push(e + '.gif');
       })
     });
   }

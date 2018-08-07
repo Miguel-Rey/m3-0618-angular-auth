@@ -6,23 +6,10 @@
   width: 100px;
   height: 100px;
   display: none;
+  img{
+    width: 100%;
+  }
   &.show{
     display: block;
   }
-}
-
-#showTunner{
-  position: absolute; 
-  left: 0;
-  transform: rotate(-90deg) translate(0px,-28px);
-  z-index: 1;
-  background-color: #fb9f28;
-  color: #fff;
-  padding: 1em 2em;
-  border-radius:5px;
-}
-
-pre{
-  font-family: sans-serif;
-  background-color: #fff;
 }
