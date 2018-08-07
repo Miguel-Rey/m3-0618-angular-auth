@@ -17,7 +17,7 @@
     <form action="">
       <input id="nav_search" autocomplete="off" type="text" name="search" [(ngModel)]="query" (ngModelChange)="getSearchSuggestions(query)">
       <i (click)="searchTop(query)" class="icon-search"></i>
-      <div class="select">
+      <div id="search-suggestions" class="select">
         <div *ngFor="let suggest of suggestions" class="option">{{suggest}}</div>
       </div>
     </form>
@@ -33,7 +33,7 @@
         </li>
       </ul>
     </div>
-    <div *ngIf="!sessionService.user">
+    <div *ngIf="!sessionService.user" class="profile no-logged">
       <ul>
           <li *ngIf="!sessionService.user">
               <a [routerLink]="['/signup']">Signup</a>

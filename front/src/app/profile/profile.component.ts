@@ -45,9 +45,11 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/single',id])
   }
 
-  deleteFavourite(url){
-    this.userFavourites.splice(this.userFavourites.indexOf(url), 1);
-    this.ChordsService.deleteFavourite(url).subscribe( data => {
+  deleteFavourite(favourites){
+    if(this.userFavourites.indexOf(favourites) > -1){
+      this.userFavourites.splice(this.userFavourites.indexOf(favourites), 1);
+    }
+    this.ChordsService.deleteFavourite(favourites.url).subscribe( data => {
     });
   }
 

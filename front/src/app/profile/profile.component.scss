@@ -83,6 +83,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-headphones:before {
+  content: "\e910";
+}
+.icon-music:before {
+  content: "\e911";
+}
 .icon-user:before {
   content: "\e971";
 }
@@ -100,4 +106,7 @@
 }
 .icon-heart:before {
   content: "\e9da";
+}
+.icon-heart-broken:before {
+  content: "\e9db";
 }

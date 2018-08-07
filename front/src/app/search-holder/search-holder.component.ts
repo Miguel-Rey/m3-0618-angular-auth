@@ -68,9 +68,13 @@ export class SearchHolderComponent implements OnInit {
   }
 
   searchMore(query: string) {
-    this.page++;
     this.ChordsService.searchChords(query, this.page).subscribe(data => {
-      this.searchResult = this.searchResult.concat(data);
+      if(data.status === 404){
+        document.getElementById('more-results').innerText = 'No more results!'
+        document.getElementById('more-results').setAttribute('disabled','true');
+      } else {
+        this.searchResult = this.searchResult.concat(data);
+      }
     });
   }
 

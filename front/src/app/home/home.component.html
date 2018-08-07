@@ -1,42 +1,12 @@
 <form>
   <input type="text" name="search" [(ngModel)]="query" (ngModelChange)="getSearchSuggestions(query)">
   <button (click)="searchTop(query)">Search</button>
+  <div *ngIf="suggestions" class='suggestions'>
+    <h4>Suggestions</h4>
+    <ul>
+      <li *ngFor="let suggest of suggestions">
+        {{suggest}}
+      </li>
+    </ul>
+  </div>
 </form>
-
-<div class='suggestions'>
-  <h4>Suggestions</h4>
-  <ul>
-    <li *ngFor="let suggest of suggestions">
-      {{suggest}}
-    </li>
-  </ul>
-</div>
-
-<div *ngIf="topTracks.length > 0" class="top-tracks">
-  <h2>TOP TRACKS</h2>
-  <div *ngFor="let track of topTracks">
-    <p>{{track.name}}</p>
-    <button (click)="searchTop(track.name)">Search tabs</button>
-  </div>
-</div>
-
-<div *ngIf="topArtist.length > 0" class="top-tracks">
-    <h2>TOP ARTIST</h2>
-    <div *ngFor="let artist of topArtist">
-      <p>{{artist.name}}</p>
-      <button (click)="searchTop(artist.name)">Search tabs</button>
-    </div>
-  </div>
-
-<div class="chord" *ngFor="let chord of searchResult">
-  <div>
-    <p>{{chord.name}}</p>
-    <p>{{chord.artist}}</p>
-    <p>{{chord.rating}}/5 of {{chord.numberRates}} votes</p>
-    <button (click)="getSingleChord(chord.url)">More details</button>
-    <button *ngIf="!isFavourite(chord.url)" (click)="addFavourite(chord.url)">Add to favourites</button>
-    <button *ngIf="isFavourite(chord.url)" (click)="deleteFavourite(chord.url)">Delete from favourites</button>
-  </div>
-</div>
-
-<button *ngIf='searchResult.length > 1' (click)="searchMore(prevQuery)">More results</button>

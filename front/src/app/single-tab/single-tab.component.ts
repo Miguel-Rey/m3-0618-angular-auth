@@ -88,5 +88,10 @@ export class SingleTabComponent implements OnInit {
       this.artistInfo = data
     })
   }
+  searchTop(query) {
+    let sanitizedQuery = query.split(" ").join("_");
+    this.router.navigate(["/search", sanitizedQuery]);
+    document.getElementById('search-suggestions').classList.remove('show');
+  }
 }
 

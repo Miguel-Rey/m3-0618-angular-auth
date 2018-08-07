@@ -29,12 +29,12 @@ export class ChordContentComponent implements OnChanges {
     let ChordComponent = this;
     let chords = this.elRef.nativeElement.querySelectorAll('.chord');
     chords.forEach( e => {
-      e.addEventListener('mouseover', function(e){
+      e.addEventListener('click', function(e){
         ChordComponent.showChord(e.path[1]);
       })
-      e.addEventListener('mouseout', function(e){
-        ChordComponent.hideChord();
-      })
+      // e.addEventListener('mouseout', function(e){
+      //   ChordComponent.hideChord();
+      // })
     })
     document.getElementById('trasposeUp').addEventListener('click', ()=>{
       this.traposeChordsUp();  
