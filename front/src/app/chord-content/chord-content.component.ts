@@ -196,8 +196,8 @@ export class ChordContentComponent implements OnChanges {
     this.popupImages = [];
     this.elRef.nativeElement.querySelectorAll('.chord-popup .images')[0].classList.remove(`chordnumber${this.popupSettings.length}`)
     return this.ChordsImageService.getChordImages(note).subscribe(data => {
-      if(data.images.length > 0){
-        let imagesArr = data.images
+      if(data.length > 0){
+        let imagesArr = data;
         imagesArr.forEach(e => {
           this.popupImages.push(e + '.gif');
         })

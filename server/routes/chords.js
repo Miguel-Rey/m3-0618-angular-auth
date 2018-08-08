@@ -12,26 +12,22 @@ function checkSrc(url){
   let response;
   return axios.get(sanitisedUrl)
   .then(data =>{
-    console.log('Pasa el acorde')
     return url
   })
   .catch( e => {
-    console.log('Falla un acorde')
-    return 'no url'
+    return null
   })
 }
 
 router.get('/chordimage/:id', (req, res, next) => {
   const id = req.params.id.replace('___','♯');
-  console.log(id)
   Chord.findOne({completeName: id})
     .then( chord => {
       Promise.all(chord.images.map(e => {
-        checkSrc(e);
+        return checkSrc(e);
       })).then( data => {
-        console.log('Hey',data);
+        res.status(200).json(data.filter(e => e));
       })
-      res.status(200).json(chord);
     })
     .catch(e => console.log(e))
 })
