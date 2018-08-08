@@ -4,14 +4,36 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Chord = require('../models/Chords');
 const passport = require('passport');
-const ugs = require('ultimate-guitar-scraper')
+const ugs = require('ultimate-guitar-scraper');
+const axios = require('axios');
+
+function checkSrc(url){
+  let sanitisedUrl = `http://localhost:4200/${url.slice(6)}.gif`
+  let response;
+  return axios.get(sanitisedUrl)
+  .then(data =>{
+    console.log('Pasa el acorde')
+    return url
+  })
+  .catch( e => {
+    console.log('Falla un acorde')
+    return 'no url'
+  })
+}
 
 router.get('/chordimage/:id', (req, res, next) => {
   const id = req.params.id.replace('___','♯');
   console.log(id)
-  Chord.find({completeName: id})
-    .then( chord => res.status(200).json(chord))
-    .catch(e => next(e))
+  Chord.findOne({completeName: id})
+    .then( chord => {
+      Promise.all(chord.images.map(e => {
+        checkSrc(e);
+      })).then( data => {
+        console.log('Hey',data);
+      })
+      res.status(200).json(chord);
+    })
+    .catch(e => console.log(e))
 })
 
 router.post('/', (req, res, next) => {
@@ -72,7 +94,6 @@ router.post('/delete', (req, res, next) => {
   }
   User.findByIdAndUpdate(req.user._id,{favourites: favourites})
   .then( user => {
-    console.log(user);
     res.status(200).json(user);
   })
   .catch( err => {

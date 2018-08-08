@@ -65,7 +65,7 @@ router.get('/currentuser', (req,res,next) => {
   if(req.user){
     res.status(200).json(req.user);
   }else{
-    next(new Error('Not logged in'))
+    res.status(403).json({ message: 'You need to login first'})
   }
 })
 

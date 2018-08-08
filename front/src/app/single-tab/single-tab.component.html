@@ -61,7 +61,7 @@
     </div>
     
     
-    <div class="recomended">
+    <div *ngIf="recomended.length > 0" class="recomended">
       <h4>Recomended</h4>
       <ul *ngIf="recomended.length > 0">
         <li *ngFor="let recomendedItem of recomended" (click)="getSingleChord(recomendedItem.url)">

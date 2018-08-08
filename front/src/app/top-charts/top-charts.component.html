@@ -8,14 +8,14 @@
       <p class="summary" [innerHTML] = 'artistInfo.artist.bio.summary'></p>
       <button (click)="searchTop(artistInfo.artist.name)">Search tabs!</button>
     </div>
-  </div>
+</div>
 
 <div class="charts-wrap">
     <div *ngIf="topTracks.length > 0" class="chart-list">
         <h2>TOP TRACKS</h2>
         <div class="chart-list-item" *ngFor="let track of topTracks" (click)="searchTop(track.name)">
           <p>{{track.name}} - {{track.artist.name}}</p>
-          <p>{{track.playcount}}</p>
+          <div>{{track.playcount}} <i class="icon-headphones"></i></div>
         </div>
       </div>
       
@@ -26,7 +26,7 @@
                (click)="getArtistInfo(artist.name)" 
           >
             <p>{{artist.name}}</p>
-            <p>{{artist.playcount}}</p>
+            <div>{{artist.playcount}} <i class="icon-headphones"></i></div>
           </div>
     </div>
 </div>

@@ -17,7 +17,6 @@ export class ChordsImageService {
   }
 
   getChordImages(note){
-    console.log(note)
     return this.http.get(`${BASEURL}/api/chords/chordimage/${note.replace('#','___')}`).pipe(
       map ( (res:Response) => {
         return res.json()

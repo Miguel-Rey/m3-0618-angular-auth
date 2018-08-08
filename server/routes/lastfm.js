@@ -49,6 +49,13 @@ router.get('/info/song/:artist/:song', (req, res, next) => {
   })
 })
 
+router.get('/geo/song', (req, res, next)=> {
+  axios.get(`http://ws.audioscrobbler.com/2.0/?method=geo.gettoptracks&country=spain&api_key=${process.env.LASTFMKEY}&format=json`)
+  .then( response => {
+    res.status(200).json(response.data);
+  })
+})
+
 
 router.use((err, req, res, next) => {
   res.status(500).json({ message: err.message })

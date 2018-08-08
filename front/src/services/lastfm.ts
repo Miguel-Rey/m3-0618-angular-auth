@@ -63,4 +63,12 @@ export class LastFMService {
     )
   }
 
+  getGeoTopTracks(){
+    return this.http.get(`${BASEURL}/api/lastfm/geo/song`).pipe(
+      map ( (res: Response) => {
+        return res.json()
+      })
+    )
+  }
+
 }

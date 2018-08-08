@@ -9,6 +9,7 @@ import { TunerComponent } from './tuner/tuner.component';
 import { TopChartsComponent } from './top-charts/top-charts.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path:'signup', component:SignupComponent},
   { path:'login', component:LoginComponent},
   { path: 'home', component: HomeComponent},

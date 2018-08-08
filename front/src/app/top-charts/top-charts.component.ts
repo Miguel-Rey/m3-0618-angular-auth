@@ -21,19 +21,17 @@ export class TopChartsComponent implements OnInit {
   ngOnInit() {
     this.getTopArtist();
     this.getTopTracks();
-    this.getArtistInfo('drake');
   }
 
   getTopTracks() {
     this.LastFMService.getTopTracks().subscribe(data => {
-      console.log(data.tracks.track);
       this.topTracks = data.tracks.track;
     });
   }
   getTopArtist() {
     this.LastFMService.getTopArtist().subscribe(data => {
-      console.log(data.artists.artist);
       this.topArtist = data.artists.artist;
+      this.getArtistInfo(data.artists.artist[0].name);
     });
   }
   searchTop(query) {
@@ -48,8 +46,6 @@ export class TopChartsComponent implements OnInit {
   }
 
   getTrackInfo(artist, song){
-    this.LastFMService.getTrackInfo(artist,song).subscribe( data => {
-      console.log(data);
-    })
+    this.LastFMService.getTrackInfo(artist,song).subscribe()
   }
 }

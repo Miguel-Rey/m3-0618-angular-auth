@@ -19,6 +19,8 @@ export class ChordContentComponent implements OnChanges {
   popupSettings = {
     x: 0,
     y: 0,
+    length: 0,
+    current: 0
   }
 
   constructor(private elRef:ElementRef, private ChordsImageService: ChordsImageService) { 
@@ -38,7 +40,11 @@ export class ChordContentComponent implements OnChanges {
     let chords = this.elRef.nativeElement.querySelectorAll('.chord');
     chords.forEach( e => {
       e.addEventListener('click', function(e){
+        ChordComponent.popupSettings.x = e.pageX;
+        ChordComponent.popupSettings.y = e.pageY;
         ChordComponent.showChord(e.path[1]);
+        let positions = `left:${ChordComponent.popupSettings.x}px; top:${ChordComponent.popupSettings.y}px`;
+        ChordComponent.elRef.nativeElement.querySelectorAll('.chord-popup.show')[0].setAttribute('style',positions)
       })
       // e.addEventListener('mouseout', function(e){
       //   ChordComponent.hideChord();
@@ -71,12 +77,29 @@ export class ChordContentComponent implements OnChanges {
 
   showChord(chord){
     let popup = document.querySelector('.chord-popup');
+    let images = document.querySelector('.chord-popup .images')
+    this.popupSettings.current = 0;
+    images.setAttribute("style",`left:0px`)
     popup.classList.add('show')
     this.getChordImages(chord.innerText); 
   }
   hideChord(){
     let popup = document.querySelector('.chord-popup')
     popup.classList.remove('show')
+  }
+  nextChord(){
+    if(this.popupSettings.current < this.popupSettings.length -1){
+      let images = document.querySelector('.chord-popup .images')
+      this.popupSettings.current++
+      images.setAttribute("style",`left:${this.popupSettings.current*-150}px`)
+    }
+  }
+  previousChord(){
+    if(this.popupSettings.current > 0){
+      let images = document.querySelector('.chord-popup .images')
+      this.popupSettings.current--
+      images.setAttribute("style",`left:${this.popupSettings.current*-150}px`)
+    }
   }
 
 
@@ -171,13 +194,20 @@ export class ChordContentComponent implements OnChanges {
   getChordImages(note) {
     this.popupName = note;
     this.popupImages = [];
-    console.log(note)
+    this.elRef.nativeElement.querySelectorAll('.chord-popup .images')[0].classList.remove(`chordnumber${this.popupSettings.length}`)
     return this.ChordsImageService.getChordImages(note).subscribe(data => {
-      let imagesArr = data[0].images
-      imagesArr.forEach(e => {
-        this.popupImages.push(e + '.gif');
-      })
+      if(data.images.length > 0){
+        let imagesArr = data.images
+        imagesArr.forEach(e => {
+          this.popupImages.push(e + '.gif');
+        })
+        this.popupSettings.length = imagesArr.length;
+        this.elRef.nativeElement.querySelectorAll('.chord-popup .images')[0].classList.add(`chordnumber${this.popupSettings.length}`)
+      }else{
+        this.popupSettings.length = 1;
+        this.elRef.nativeElement.querySelectorAll('.chord-popup .images')[0].classList.add(`chordnumber${this.popupSettings.length}`)
+        this.popupImages.push('../../assets/img/placeholder.png')
+      }
     });
   }
-
 }

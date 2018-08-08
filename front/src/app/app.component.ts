@@ -2,6 +2,7 @@ import { Component, ElementRef } from "@angular/core";
 import { SessionService } from "../services/session";
 import { ChordsService } from "../services/chords";
 import { Router } from "@angular/router";
+import { isNull } from "../../node_modules/@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "app-root",
@@ -26,12 +27,14 @@ export class AppComponent {
         let isOptionSelected = false;
         let selectedOptionValue;
         let options = this.elRef.nativeElement.querySelectorAll('.option')
-        options.forEach(e => {
-          if(e.classList.contains('selected')){
-            isOptionSelected = true
-            selectedOptionValue = e.innerText;
-          }
-        })
+        if(options.length > 0){
+          options.forEach(e => {
+            if(e.classList.contains('selected')){
+              isOptionSelected = true
+              selectedOptionValue = e.innerText;
+            }
+          })
+        }
         if(isOptionSelected){
           this.searchTop(selectedOptionValue);
         } else {
@@ -41,18 +44,23 @@ export class AppComponent {
       if(e.keyCode === 40 && document.getElementById('nav_search') === document.activeElement){
         this.selectedSuggestion++
         let options = this.elRef.nativeElement.querySelectorAll('.option')
-        options.forEach(e => {
-          e.classList.remove('selected')
-        })
-        document.getElementsByClassName('option')[this.selectedSuggestion].classList.add('selected')
+        if(options.length > 0){
+          console.log(options);
+          options.forEach(e => {
+            e.classList.remove('selected')
+          })
+          document.getElementsByClassName('option')[this.selectedSuggestion].classList.add('selected')
+        }
       }
       if(e.keyCode === 38 && document.getElementById('nav_search') === document.activeElement){
         this.selectedSuggestion--
         let options = this.elRef.nativeElement.querySelectorAll('.option')
+        if(options.length > 0){
         options.forEach(e => {
           e.classList.remove('selected')
         })
         document.getElementsByClassName('option')[this.selectedSuggestion].classList.add('selected')
+        }
       }
     })
     this.sessionService.isLogged().subscribe( user => {
@@ -61,8 +69,10 @@ export class AppComponent {
   }
 
   logout() {
-    this.sessionService.logout().subscribe();
-    this
+    this.sessionService.logout().subscribe( user => {
+      this.router.navigate(['/login'])
+      }
+    );
   }
 
   getSearchSuggestions(query) {
@@ -78,19 +88,23 @@ export class AppComponent {
   }
 
   searchTop(query) {
-    let sanitizedQuery = query.split(" ").join("_");
-    this.router.navigate(["/search", sanitizedQuery]);
-    this.query = "";
-    this.suggestions = [];
-    document.getElementById('search-suggestions').classList.remove('show');
+    if(query != null){
+      let sanitizedQuery = query.split(" ").join("_");
+      this.router.navigate(["/search", sanitizedQuery]);
+      this.query = "";
+      this.suggestions = [];
+      document.getElementById('search-suggestions').classList.remove('show');
+    }
   }
 
   toggleProfile(){
     let menu = document.getElementsByClassName('menu_profile')[0]
-    if(menu.classList.contains('hidden')){
-      menu.classList.remove('hidden');
-    } else {
-      menu.classList.add('hidden');
+    if(menu != undefined){
+      if(menu.classList.contains('hidden')){
+        menu.classList.remove('hidden');
+      } else {
+        menu.classList.add('hidden');
+      }
     }
   }
 }

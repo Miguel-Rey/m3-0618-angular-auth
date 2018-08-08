@@ -44,9 +44,7 @@ export class SingleTabComponent implements OnInit {
 
   addFavourite(url){
     this.userFavourites.push(url);
-    this.ChordsService.addFavourite(url).subscribe( data => {
-      console.log('succesfully added', data);
-    })
+    this.ChordsService.addFavourite(url).subscribe()
   }
   
   deleteFavourite(url){
@@ -66,13 +64,15 @@ export class SingleTabComponent implements OnInit {
   }
   getSimilarTracks(artist, song){
     this.LastFMService.getSimilarTracks(artist, song).subscribe(data => {
-      let long = data.similartracks.track.length < 10 ? data.similartracks.track.length : 10;
-      for( let i = 0; i < long; i++){
-        this.ChordsService.searchChords(data.similartracks.track[i].name, 1).subscribe(data => {
-          if(data.length > 0){
-            this.recomended.push(data[0]);
-          }
-        })
+      if(!data.hasOwnProperty('error')){
+        let long = data.similartracks.track.length < 10 ? data.similartracks.track.length : 10;
+        for( let i = 0; i < long; i++){
+          this.ChordsService.searchChords(data.similartracks.track[i].name, 1).subscribe(data => {
+            if(data.length > 0){
+              this.recomended.push(data[0]);
+            }
+          })
+        }
       }
     });
   }
